@@ -1,0 +1,38 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+</head>
+
+<body>
+    <div id="app">
+        <% if (posts.length> 0) { %>
+            <% posts.forEach(post=> { %>
+                <div>
+                    <div>
+                        <%= post.title %>
+                    </div>
+                    <div>
+                        <p>
+                            <%= post.datetime %>
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <p>
+                        <%= post.body %>
+                    </p>
+                </div>
+                <div>
+                </div>
+                <% }) %>
+                    <% } else { %>
+                        <p>You did not post anything...</p>
+                        <% } %>
+    </div>
+</body>
+
+</html>
