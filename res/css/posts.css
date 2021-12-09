@@ -1,0 +1,47 @@
+section {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 60px auto;
+    background-color: white;
+    padding: 50px;
+}
+
+article {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    margin: 10px;
+	border-radius: 5px;
+}
+
+#addNewPostBtn {
+    margin-left: 10px;
+    width: 15%;
+}
+
+.post-info {
+	padding: 10px;
+	padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header + img {
+    width: 100%;
+}
+
+header ~ p {
+    padding: 10px;
+    font-weight: bold;
+}
+
+.like-button {
+    padding: 10px;
+}
+
+.like-button button {
+	border-radius: 5px;
+	border-style:solid;
+	border-color: rgb(16, 114, 212);
+    background-color: rgb(16, 114, 212);
+}

@@ -4,35 +4,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/posts.css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
     <title>Posts</title>
 </head>
 
 <body>
-    <div id="app">
+    <section>
+        <button id="addNewPostBtn" onclick="location.href='/addnewpost'">Add new post</button>
         <% if (posts.length> 0) { %>
             <% posts.forEach(post=> { %>
-                <div>
-                    <div>
-                        <%= post.title %>
-                    </div>
-                    <div>
+                <article>
+                    <header class="post-info" onclick="location.href='/singlepost/<%= post.id %>'">
+                        <img src="images/userpic.png" alt="User" width="40" height="40">
+                        <h4>
+                            <%= post.title %>
+                        </h4>
                         <p>
                             <%= post.datetime %>
                         </p>
+                    </header>
+                    <div onclick="location.href='/singlepost/<%= post.id %>'">
+                        <p>
+                            <%= post.body %>
+                        </p>
                     </div>
-                </div>
-                <div>
-                    <p>
-                        <%= post.body %>
-                    </p>
-                </div>
-                <div>
-                </div>
+                    <footer>
+                        <div class="like-button">
+                            <button><img src="images/like.png" alt="Like this post" width="30" height="28"></button>
+                        </div>
+                    </footer>
+                </article>
                 <% }) %>
                     <% } else { %>
                         <p>You did not post anything...</p>
                         <% } %>
-    </div>
+    </section>
 </body>
 
 </html>

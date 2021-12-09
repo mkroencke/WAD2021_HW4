@@ -10,6 +10,8 @@ CREATE DATABASE wadhw TEMPLATE template0
 
 DROP TABLE IF EXISTS public.posts;
 
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE public.posts (
     id uuid NOT NULL DEFAULT uuid_generate_v1(),
     title text NOT NULL,
