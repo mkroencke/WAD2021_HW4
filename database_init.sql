@@ -10,13 +10,11 @@ CREATE DATABASE wadhw TEMPLATE template0
 
 DROP TABLE IF EXISTS public.posts;
 
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
 CREATE TABLE public.posts (
-    id uuid NOT NULL DEFAULT uuid_generate_v1(),
+    id SERIAL PRIMARY KEY,
     title text NOT NULL,
     body text NOT NULL,
+    picurl text,
     likes integer NOT NULL DEFAULT 0,
-    datetime timestamp WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT prim_key PRIMARY KEY (id) 
+    datetime timestamp WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );

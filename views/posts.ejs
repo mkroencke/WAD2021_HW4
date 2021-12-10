@@ -30,9 +30,12 @@
                             </p>
                         </header>
                         <div onclick="location.href='/singlepost/<%= post.id %>'">
-                            <p>
-                                <%= post.body %>
-                            </p>
+                            <% if (posts.picurl !== null) { %>
+                                <img src="<%= post.picurl %>"/>
+                                <% } %>
+                                    <p>
+                                        <%= post.body %>
+                                    </p>
                         </div>
                         <footer>
                             <div class="like-button" postid="<%= post.id %>">

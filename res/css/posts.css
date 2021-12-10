@@ -26,11 +26,11 @@ article {
     align-items: center;
 }
 
-header + img {
+header ~ div > img {
     width: 100%;
 }
 
-header ~ p {
+header ~ div > p {
     padding: 10px;
     font-weight: bold;
 }
