@@ -36,6 +36,17 @@ app.get('/singlepost/:id', async(req, res) => {
     }
 });
 
+app.put('/posts/:id', async(req, res) => { 
+    try { 
+        const id = req.params.id;
+        const updatepost = await pool.query( 
+            "UPDATE posts SET likes = likes + 1 WHERE id = $1", [id] 
+        );
+    } catch (err) { 
+        console.error(err.message); 
+    } 
+});
+
 app.get('/addnewpost', (req, res) => {
     res.render('addnewpost');
 });

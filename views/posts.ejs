@@ -6,41 +6,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/posts.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
     <title>Posts</title>
 </head>
 
 <body>
-    <section>
-        <button id="addNewPostBtn" onclick="location.href='/addnewpost'">Add new post</button>
-        <% if (posts.length> 0) { %>
-            <% posts.forEach(post=> { %>
-                <article>
-                    <header class="post-info" onclick="location.href='/singlepost/<%= post.id %>'">
-                        <img src="images/userpic.png" alt="User" width="40" height="40">
-                        <h4>
-                            <%= post.title %>
-                        </h4>
-                        <p>
-                            <%= post.datetime %>
-                        </p>
-                    </header>
-                    <div onclick="location.href='/singlepost/<%= post.id %>'">
-                        <p>
-                            <%= post.body %>
-                        </p>
-                    </div>
-                    <footer>
-                        <div class="like-button">
-                            <button><img src="images/like.png" alt="Like this post" width="30" height="28"></button>
+    <%- include('./partials/header.ejs') %>
+        <section>
+            <button id="addNewPostBtn" onclick="location.href='/addnewpost'">Add new post</button>
+            <% if (posts.length> 0) { %>
+                <% posts.forEach(post=> { %>
+                    <article>
+                        <header class="post-info" onclick="location.href='/singlepost/<%= post.id %>'">
+                            <img src="images/userpic.png" alt="User" width="40" height="40">
+                            <h4>
+                                <%= post.title %>
+                            </h4>
+                            <p>
+                                <%= post.datetime.toLocaleString("en-US", { year: 'numeric' , month: 'short' ,
+                                    day: 'numeric' , hour12: false, hour: '2-digit' , minute: '2-digit' }) %>
+                            </p>
+                        </header>
+                        <div onclick="location.href='/singlepost/<%= post.id %>'">
+                            <p>
+                                <%= post.body %>
+                            </p>
                         </div>
-                    </footer>
-                </article>
-                <% }) %>
-                    <% } else { %>
-                        <p>You did not post anything...</p>
-                        <% } %>
-    </section>
+                        <footer>
+                            <div class="like-button" postid="<%= post.id %>">
+                                <button>
+                                    <img src="/images/like.png" alt="Like this post" width="30" height="28" />
+                                </button>
+                                <p>
+                                    <%= post.likes %>
+                                </p>
+                            </div>
+                        </footer>
+                    </article>
+                    <% }) %>
+                        <% } else { %>
+                            <p>You did not post anything...</p>
+                            <% } %>
+        </section>
+        <%- include('./partials/footer.ejs') %>
 </body>
+
+<script>
+    for (let likeBtn of document.querySelectorAll(".like-button")) {
+        likeBtn.addEventListener("click", (e) => {
+            postid = likeBtn.getAttribute("postid");
+            fetch("/posts/" + postid, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }).success((window.location.reload()));
+        });
+    }
+</script>
 
 </html>

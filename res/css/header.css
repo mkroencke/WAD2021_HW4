@@ -1,0 +1,79 @@
+#pageHeader {
+display: flex;
+position: fixed;
+flex-direction: row;
+top: 0;
+left: 0;
+padding: 5px;
+width: 100%;
+background-color: white;
+justify-content: space-between;
+}
+
+.pageHeaderLeft {
+display: flex;
+justify-content: flex-start;
+align-items: center;
+width: 30%;
+}
+
+.pageHeaderCenter {
+width: 40%;
+align-items: center;
+justify-content: center;
+}
+
+.pageHeaderRight {
+display: flex;
+align-items: center;
+justify-content: flex-end;
+width: 30%;
+}
+
+.pageHeaderLeft,
+.pageHeaderRight {
+flex: 1;
+}
+
+nav {
+margin-right: 20px;
+}
+
+#logo {
+padding-left: 20px;
+}
+
+#userpic {
+padding-right: 20px;
+}
+
+#search {
+display: flex;
+align-items: center;
+justify-content: center;
+box-sizing: border-box;
+height: 100%;
+}
+
+#search > input {
+box-sizing: border-box;
+border-style: solid;
+border-right: none;
+border-radius: 3px 0px 0px 3px;
+width: 100%;
+}
+
+#search > button {
+font-weight: bold;
+box-sizing: border-box;
+border-radius: 0px 5px 5px 0px;
+border-style: solid;
+background-color: rgb(16, 114, 212);
+border-color: rgb(16, 114, 212);
+color: white;
+}
+
+#search > button:hover {
+border-color: rgb(24, 5, 104);
+background-color: rgb(24, 5, 104);
+}

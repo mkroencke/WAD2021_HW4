@@ -1,0 +1,24 @@
+<header class="header" id="pageHeader">
+    <div class="pageHeaderLeft">
+        <div id="logo">
+            <router-link :to="{ name: 'home' }"><img src="/images/postit-logo.png" alt="PostIt" width="40" />
+            </router-link>
+        </div>
+    </div>
+    <div class="pageHeaderCenter">
+        <div id="search">
+            <input type="text" />
+            <button>Search</button>
+        </div>
+    </div>
+    <div class="pageHeaderRight">
+        <nav>
+            <a href="/">Login</a> |
+            <a href="/posts">Your Posts</a> |
+            <a href="/addnewpost">Add new post</a>
+        </nav>
+        <div id="userpic">
+            <img src="/images/userpic.png" alt="User" width="40" />
+        </div>
+    </div>
+</header>

@@ -36,12 +36,20 @@ header ~ p {
 }
 
 .like-button {
+    display: flex;
     padding: 10px;
 }
 
 .like-button button {
-	border-radius: 5px;
-	border-style:solid;
-	border-color: rgb(16, 114, 212);
+    margin-right: 10px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(16, 114, 212);
     background-color: rgb(16, 114, 212);
+}
+
+.like-button button:hover {
+    border-color: rgb(231, 250, 151);
+    background-color: rgb(231, 250, 151);
+    filter: invert(100%);
 }

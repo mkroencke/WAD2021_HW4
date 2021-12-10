@@ -1,0 +1,14 @@
+#pageFooter {
+    width: 100%;
+    position: fixed;
+  }
+  
+  #footerDiv {
+    width: 100%;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+  }
