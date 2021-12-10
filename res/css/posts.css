@@ -53,3 +53,18 @@ header ~ div > p {
     background-color: rgb(231, 250, 151);
     filter: invert(100%);
 }
+
+.post-buttons {
+    margin-left: 10px;
+    border-radius: 5px;
+    border-style: solid;
+    font-weight: bold;
+    color: white;
+    border-color: rgb(16, 114, 212);
+    background-color: rgb(16, 114, 212);
+  }
+  
+  .post-buttons:hover {
+    border-color: rgb(24, 5, 104);
+    background-color: rgb(24, 5, 104);
+  }

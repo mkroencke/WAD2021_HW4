@@ -6,6 +6,7 @@ const app = express();
 app.set('view engine', 'ejs');
 
 app.use(express.static(__dirname + '/res'));
+app.use(express.json());
  
 app.listen(3000);
 
@@ -39,8 +40,9 @@ app.get('/singlepost/:id', async(req, res) => {
 app.put('/posts/:id', async(req, res) => { 
     try { 
         const id = req.params.id;
+        const likes = req.body.likes;
         const updatepost = await pool.query( 
-            "UPDATE posts SET likes = likes + 1 WHERE id = $1", [id] 
+            "UPDATE posts SET likes = $1 WHERE id = $2", [likes, id] 
         );
     } catch (err) { 
         console.error(err.message); 

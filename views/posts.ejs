@@ -15,7 +15,11 @@
 <body>
     <%- include('./partials/header.ejs') %>
         <section>
-            <button id="addNewPostBtn" onclick="location.href='/addnewpost'">Add new post</button>
+            <div>
+                <button class="post-buttons" id="addNewPostBtn" onclick="location.href='/addnewpost'">Add new
+                    post</button>
+                <button class="post-buttons" id="resetBtn">Reset Likes</button>
+            </div>
             <% if (posts.length> 0) { %>
                 <% posts.forEach(post=> { %>
                     <article>
@@ -30,16 +34,16 @@
                             </p>
                         </header>
                         <div onclick="location.href='/singlepost/<%= post.id %>'">
-                            <% if (posts.picurl !== null) { %>
-                                <img src="<%= post.picurl %>"/>
+                            <% if (posts.picurl !==null) { %>
+                                <img src="<%= post.picurl %>" />
                                 <% } %>
                                     <p>
                                         <%= post.body %>
                                     </p>
                         </div>
                         <footer>
-                            <div class="like-button" postid="<%= post.id %>">
-                                <button>
+                            <div class="like-button">
+                                <button class="likeButton" postid="<%= post.id %>" likes="<%= post.likes %>">
                                     <img src="/images/like.png" alt="Like this post" width="30" height="28" />
                                 </button>
                                 <p>
@@ -57,17 +61,32 @@
 </body>
 
 <script>
-    for (let likeBtn of document.querySelectorAll(".like-button")) {
-        likeBtn.addEventListener("click", (e) => {
-            postid = likeBtn.getAttribute("postid");
+    document.querySelectorAll(".likeButton").forEach((e) => {
+        e.addEventListener("click", () => {
+            postid = e.getAttribute("postid");
+            likes = e.getAttribute("likes");
             fetch("/posts/" + postid, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
-            }).success((window.location.reload()));
+                body: JSON.stringify({likes: (parseInt(likes) + 1)})
+            }).then((window.location.reload()));
         });
-    }
+    });
+
+    document.querySelector("#resetBtn").addEventListener("click", (e) => {
+        document.querySelectorAll(".likeButton").forEach((e) => {
+            postid = e.getAttribute("postid");
+            fetch("/posts/" + postid, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({likes: 0})
+            }).then((window.location.reload()));
+        })
+    });
 </script>
 
 </html>
