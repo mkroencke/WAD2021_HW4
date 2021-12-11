@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/posts.css" />
     <link rel="stylesheet" href="/css/header.css" />
@@ -61,32 +62,38 @@
 </body>
 
 <script>
-    document.querySelectorAll(".likeButton").forEach((e) => {
-        e.addEventListener("click", () => {
-            postid = e.getAttribute("postid");
-            likes = e.getAttribute("likes");
-            fetch("/posts/" + postid, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({likes: (parseInt(likes) + 1)})
-            }).then((window.location.reload()));
-        });
-    });
-
-    document.querySelector("#resetBtn").addEventListener("click", (e) => {
+    $(document).ready(function () {
         document.querySelectorAll(".likeButton").forEach((e) => {
-            postid = e.getAttribute("postid");
-            fetch("/posts/" + postid, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({likes: 0})
-            }).then((window.location.reload()));
+            e.addEventListener("click", () => {
+                postid = e.getAttribute("postid");
+                likes = e.getAttribute("likes");
+                $.ajax({
+                    url: "/posts/" + postid,
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ likes: (parseInt(likes) + 1) }),
+                    success: function () {
+                        window.location.reload();
+                    }
+                });
+            })
+        });
+
+        document.querySelector("#resetBtn").addEventListener("click", () => {
+            document.querySelectorAll(".likeButton").forEach((e) => {
+                postid = e.getAttribute("postid");
+                $.ajax({
+                    url: "/posts/" + postid,
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ likes: 0 }),
+                    success: function () {
+                        window.location.reload();
+                    }
+                });
+            })
         })
-    });
+    })
 </script>
 
 </html>
