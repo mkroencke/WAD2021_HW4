@@ -19,7 +19,7 @@
             <div>
                 <button class="post-buttons" id="addNewPostBtn" onclick="location.href='/addnewpost'">Add new
                     post</button>
-                <button class="post-buttons" id="resetBtn">Reset Likes</button>
+                <button class="post-buttons" id="resetBtn">Reset likes</button>
             </div>
             <% if (posts.length> 0) { %>
                 <% posts.forEach(post=> { %>
@@ -55,7 +55,7 @@
                     </article>
                     <% }) %>
                         <% } else { %>
-                            <p>You did not post anything...</p>
+                            <p class="no-post">You did not post anything...</p>
                             <% } %>
         </section>
         <%- include('./partials/footer.ejs') %>

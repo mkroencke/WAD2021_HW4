@@ -26,6 +26,11 @@ article {
     align-items: center;
 }
 
+.no-post {
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
 header ~ div > img {
     width: 100%;
 }
