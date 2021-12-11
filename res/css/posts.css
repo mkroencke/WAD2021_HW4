@@ -67,6 +67,10 @@ header ~ div > p {
     filter: invert(100%);
 }
 
+.post-body {
+    word-break: break-all;
+}
+
 .post-buttons {
     margin-left: 10px;
     border-radius: 5px;

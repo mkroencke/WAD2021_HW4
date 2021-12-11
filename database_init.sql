@@ -1,4 +1,4 @@
--- DROP DATABASE IF EXISTS wadhw; 
+DROP DATABASE IF EXISTS wadhw; 
 
 CREATE DATABASE wadhw TEMPLATE template0
     OWNER = postgres
