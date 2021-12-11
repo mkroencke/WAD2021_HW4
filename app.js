@@ -29,7 +29,6 @@ app.get('/posts', async(req, res) => {
 
 app.post('/posts', async(req, res) => {
     try {
-        console.log(req.body);
         payload = req.body;
         await pool.query(
             "INSERT INTO public.posts(title, body, picurl, likes, datetime) VALUES ($1, $2, $3, $4, $5);", 

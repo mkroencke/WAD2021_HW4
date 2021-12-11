@@ -1,6 +1,11 @@
-.post-title{
-    display: flex;
-    justify-content: center
+article {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    margin: 10px;
+	border-radius: 5px;
+}
+
+.post-pic {
+    width: 100%;
 }
 
 .like-single-post {
@@ -10,5 +15,6 @@
 
 .delete-button{
     display: flex;
-    justify-content: center
+    justify-content: center;
+    padding: 10px;
 }

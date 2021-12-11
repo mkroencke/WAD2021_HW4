@@ -9,48 +9,47 @@
     <link rel="stylesheet" href="/css/singlepost.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/footer.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
     <title>Single post</title>
 </head>
 
 <body>
     <%- include('./partials/header.ejs') %>
-    <article class="posts">
-        <section class="post-info">
-            <img src="/images/userpic.png" alt="User" width="40" height="40">
-            <p>
-                <%= post.datetime.toLocaleString("en-US", { year: 'numeric' , month: 'short' , day: 'numeric' , hour12: false, hour: '2-digit' , minute: '2-digit' }) %>
-            </p>
-        </section>
-        <section class="post-title">
-            <h4>
-                <%= post.title %>
-            </h4>
-        </section>
-        <% if (post.picurl) { %>
-            <img src="<%= post.picurl %>" />
-        <% } %>
-        <p class="post-body">
-            <%= post.body %>
-        </p>
-        <section class="like-single-post">
-            <div class="like-button-enabled">
-                <button class="likeButton" postid="<%= post.id %>" likes="<%= post.likes %>">
-                    <img src="/images/like.png" alt="Like this post" width="30" height="28" />
-                </button>
-                <p>
-                    <%= post.likes %>
-                </p>
-            </div>
-        </section>
-        <section class="delete-button">
-            <button class="post-buttons" postid="<%= post.id %>" id="deleteBtn">Delete this post</button>
-        </section>
-    </article>
-    <%- include('./partials/footer.ejs') %>
+        <div class="posts">
+            <article>
+                <section class="post-info">
+                    <img src="/images/userpic.png" alt="User" width="40" height="40">
+                    <h4>
+                        <%= post.title %>
+                    </h4>
+                    <p>
+                        <%= post.datetime.toLocaleString("en-US", { year: 'numeric' , month: 'short' , day: 'numeric' ,
+                            hour12: false, hour: '2-digit' , minute: '2-digit' }) %>
+                    </p>
+                </section>
+                <% if (post.picurl) { %>
+                    <img class="post-pic" src="<%= post.picurl %>" />
+                    <% } %>
+                        <p class="post-body">
+                            <%= post.body %>
+                        </p>
+                        <section class="like-single-post">
+                            <div class="like-button-enabled">
+                                <button class="likeButton" postid="<%= post.id %>" likes="<%= post.likes %>">
+                                    <img src="/images/like.png" alt="Like this post" width="30" height="28" />
+                                </button>
+                                <p>
+                                    <%= post.likes %>
+                                </p>
+                            </div>
+                        </section>
+                        <section class="delete-button">
+                            <button class="post-buttons" postid="<%= post.id %>" id="deleteBtn">Delete this
+                                post</button>
+                        </section>
+            </article>
+        </div>
+        <%- include('./partials/footer.ejs') %>
 </body>
 
 <script>
