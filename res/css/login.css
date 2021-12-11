@@ -85,6 +85,4 @@ div>h1 {
 #login-button:hover {
     border-color: rgb(24, 5, 104);
     background-color: rgb(24, 5, 104);
-    transform: scale(0.9);
-    transition-duration: 0.3s;
 }
