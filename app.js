@@ -53,7 +53,12 @@ app.get('/singlepost/:id', async(req, res) => {
         const post = await pool.query(
             "SELECT * FROM posts WHERE id = $1", [id]
         );
-        res.render('singlepost', { post: post.rows[0] });
+        console.log(post.rows);
+        if (post.rows.length !== 0) {
+            res.render('singlepost', { post: post.rows[0] });
+        } else{
+            res.status(404).render('404');
+        }
     } catch (err) {
         console.error(err.message);
     }
