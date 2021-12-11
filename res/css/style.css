@@ -8,3 +8,62 @@ html, body {
     margin: 0;
     padding: 0;
 }
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 60px auto;
+    background-color: white;
+    padding: 50px;
+}
+
+.post-info {
+    padding: 10px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.like-button-enabled, .like-button-disabled {
+    display: flex;
+    padding: 10px;
+}
+
+.like-button-enabled button {
+    margin-right: 10px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(16, 114, 212);
+    background-color: rgb(16, 114, 212);
+}
+
+.like-button-disabled button {
+    margin-right: 10px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: grey;
+    background-color: grey;
+}
+
+.like-button-enabled button:hover {
+    border-color: rgb(231, 250, 151);
+    background-color: rgb(231, 250, 151);
+    filter: invert(100%);
+}
+
+.post-buttons {
+    margin-left: 10px;
+    border-radius: 5px;
+    border-style: solid;
+    font-weight: bold;
+    color: white;
+    border-color: rgb(16, 114, 212);
+    background-color: rgb(16, 114, 212);
+}
+
+.post-buttons:hover {
+    border-color: rgb(24, 5, 104);
+    background-color: rgb(24, 5, 104);
+}

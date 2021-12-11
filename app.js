@@ -59,6 +59,25 @@ app.put('/posts/:id', async(req, res) => {
     } 
 });
 
+app.delete('/singlepost/:id', async(req, res) => {
+    try {
+        const id = req.params.id;
+        await pool.query(
+            "DELETE FROM nodetable WHERE id = $1", [id]
+        );
+        const posts = await pool.query(
+            "SELECT * FROM posts ORDER BY datetime DESC"
+        );
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.write(JSON.stringify({
+            status: "OK"
+        }));
+        res.end();
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
 app.get('/addnewpost', (req, res) => {
     res.render('addnewpost');
 });

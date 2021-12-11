@@ -1,0 +1,14 @@
+.post-title{
+    display: flex;
+    justify-content: center
+}
+
+.like-single-post {
+    display: flex;
+    justify-content: flex-end
+}
+
+.delete-button{
+    display: flex;
+    justify-content: center
+}

@@ -1,9 +1,12 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/singlepost.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/footer.css" />
     <link
@@ -12,14 +15,81 @@
     />
     <title>Single post</title>
 </head>
+
 <body>
     <%- include('./partials/header.ejs') %>
-    <h4>
-        <%= post.title %>
-    </h4>
-    <p>
-        <%= post.datetime %>
-    </p>
+    <article class="posts">
+        <section class="post-info">
+            <img src="/images/userpic.png" alt="User" width="40" height="40">
+            <p>
+                <%= post.datetime.toLocaleString("en-US", { year: 'numeric' , month: 'short' , day: 'numeric' , hour12: false, hour: '2-digit' , minute: '2-digit' }) %>
+            </p>
+        </section>
+        <section class="post-title">
+            <h4>
+                <%= post.title %>
+            </h4>
+        </section>
+        <% if (post.picurl) { %>
+            <img src="<%= post.picurl %>" />
+        <% } %>
+        <p>
+            <%= post.body %>
+        </p>
+        <section class="like-single-post">
+            <div class="like-button-enabled">
+                <button class="likeButton" postid="<%= post.id %>" likes="<%= post.likes %>">
+                    <img src="/images/like.png" alt="Like this post" width="30" height="28" />
+                </button>
+                <p>
+                    <%= post.likes %>
+                </p>
+            </div>
+        </section>
+        <section class="delete-button">
+            <button class="post-buttons" postid="<%= post.id %>" id="deleteBtn">Delete this post</button>
+        </section>
+    </article>
     <%- include('./partials/footer.ejs') %>
 </body>
+
+<script>
+    $(document).ready(function () {
+        document.querySelectorAll(".likeButton").forEach((e) => {
+            e.addEventListener("click", () => {
+                postid = e.getAttribute("postid");
+                likes = e.getAttribute("likes");
+                $.ajax({
+                    url: "/posts/" + postid,
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ likes: (parseInt(likes) + 1) }),
+                    success: function (res) {
+                        id = res.id;
+                        numberOfLikes = res.likes;
+                        $("[postid=" + '"' + id + '"' + "]").attr("likes", parseInt(numberOfLikes));
+                        $("[postid=" + '"' + id + '"' + "]").siblings("p").text(parseInt(numberOfLikes));
+                        $("[postid=" + '"' + id + '"' + "]").parent().removeClass("like-button-enabled button");
+                        $("[postid=" + '"' + id + '"' + "]").parent().addClass("like-button-disabled button");
+                        $("[postid=" + '"' + id + '"' + "]").attr("disabled", true);
+                    }
+                });
+            })
+        });
+
+        deleteBtn = document.querySelector("#deleteBtn");
+        deleteBtn.addEventListener("click", () => {
+            postid = deleteBtn.getAttribute("postid");
+            $.ajax({
+                url: "/singlepost/" + postid,
+                type: 'DELETE',
+                contentType: 'application/json'
+                success: function (res) {
+                    window.location.href = "/posts";
+                }
+            })
+        });
+    })
+</script>
+
 </html>
