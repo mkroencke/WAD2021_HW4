@@ -15,7 +15,7 @@
 
 <body>
     <%- include('./partials/header.ejs') %>
-        <section>
+        <section class="posts">
             <div>
                 <button class="post-buttons" id="addNewPostBtn" onclick="location.href='/addnewpost'">Add new
                     post</button>
@@ -30,17 +30,16 @@
                                 <%= post.title %>
                             </h4>
                             <p>
-                                <%= post.datetime.toLocaleString("en-US", { year: 'numeric' , month: 'short' ,
-                                    day: 'numeric' , hour12: false, hour: '2-digit' , minute: '2-digit' }) %>
+                                <%= post.datetime.toLocaleString("en-US", { year: 'numeric' , month: 'short' , day: 'numeric' , hour12: false, hour: '2-digit' , minute: '2-digit' }) %>
                             </p>
                         </header>
                         <div onclick="location.href='/singlepost/<%= post.id %>'">
                             <% if (post.picurl) { %>
                                 <img src="<%= post.picurl %>" />
-                                <% } %>
-                                    <p class="post-body">
-                                        <%= post.body %>
-                                    </p>
+                            <% } %>
+                            <p class="post-body">
+                                <%= post.body %>
+                            </p>
                         </div>
                         <footer>
                             <div class="like-button-enabled">
