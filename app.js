@@ -41,11 +41,12 @@ app.put('/posts/:id', async(req, res) => {
     try { 
         const id = req.params.id;
         const likes = req.body.likes;
-        const updatepost = await pool.query( 
+        await pool.query( 
             "UPDATE posts SET likes = $1 WHERE id = $2", [likes, id] 
         );
+        console.log(res);
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.write(JSON.stringify({ status: "OK" }));
+        res.write(JSON.stringify({ status: "OK", id: req.params.id }));
         res.end();
     } catch (err) { 
         console.error(err.message); 

@@ -35,7 +35,7 @@
                             </p>
                         </header>
                         <div onclick="location.href='/singlepost/<%= post.id %>'">
-                            <% if (posts.picurl !==null) { %>
+                            <% if (post.picurl) { %>
                                 <img src="<%= post.picurl %>" />
                                 <% } %>
                                     <p>
@@ -43,7 +43,7 @@
                                     </p>
                         </div>
                         <footer>
-                            <div class="like-button">
+                            <div class="like-button-enabled">
                                 <button class="likeButton" postid="<%= post.id %>" likes="<%= post.likes %>">
                                     <img src="/images/like.png" alt="Like this post" width="30" height="28" />
                                 </button>
@@ -72,8 +72,13 @@
                     type: 'PUT',
                     contentType: 'application/json',
                     data: JSON.stringify({ likes: (parseInt(likes) + 1) }),
-                    success: function () {
-                        window.location.reload();
+                    success: function (res) {
+                        id = res.id
+                        $("[postid=" + '"' + id + '"' + "]").attr("likes", parseInt(likes) + 1);
+                        $("[postid=" + '"' + id + '"' + "]").siblings("p").text(parseInt(likes) + 1);
+                        $("[postid=" + '"' + id + '"' + "]").parent().removeClass("like-button-enabled button");
+                        $("[postid=" + '"' + id + '"' + "]").parent().addClass("like-button-disabled button");
+                        $("[postid=" + '"' + id + '"' + "]").attr("disabled", true);
                     }
                 });
             })
@@ -87,8 +92,13 @@
                     type: 'PUT',
                     contentType: 'application/json',
                     data: JSON.stringify({ likes: 0 }),
-                    success: function () {
-                        window.location.reload();
+                    success: function (res) {
+                        id = res.id
+                        $("[postid=" + '"' + id + '"' + "]").attr("likes",  0);
+                        $("[postid=" + '"' + id + '"' + "]").siblings("p").text("0");
+                        $("[postid=" + '"' + id + '"' + "]").parent().removeClass("like-button-disabled button");
+                        $("[postid=" + '"' + id + '"' + "]").parent().addClass("like-button-enabled button");
+                        $("[postid=" + '"' + id + '"' + "]").attr("disabled", false);
                     }
                 });
             })
