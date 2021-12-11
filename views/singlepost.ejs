@@ -33,7 +33,7 @@
         <% if (post.picurl) { %>
             <img src="<%= post.picurl %>" />
         <% } %>
-        <p>
+        <p class="post-body">
             <%= post.body %>
         </p>
         <section class="like-single-post">
@@ -67,11 +67,12 @@
                     success: function (res) {
                         id = res.id;
                         numberOfLikes = res.likes;
-                        $("[postid=" + '"' + id + '"' + "]").attr("likes", parseInt(numberOfLikes));
-                        $("[postid=" + '"' + id + '"' + "]").siblings("p").text(parseInt(numberOfLikes));
-                        $("[postid=" + '"' + id + '"' + "]").parent().removeClass("like-button-enabled button");
-                        $("[postid=" + '"' + id + '"' + "]").parent().addClass("like-button-disabled button");
-                        $("[postid=" + '"' + id + '"' + "]").attr("disabled", true);
+                        likeBtn = $(".likeButton");
+                        likeBtn.attr("likes", parseInt(numberOfLikes));
+                        likeBtn.siblings("p").text(parseInt(numberOfLikes));
+                        likeBtn.parent().removeClass("like-button-enabled button");
+                        likeBtn.parent().addClass("like-button-disabled button");
+                        likeBtn.attr("disabled", true);
                     }
                 });
             })
@@ -83,7 +84,7 @@
             $.ajax({
                 url: "/singlepost/" + postid,
                 type: 'DELETE',
-                contentType: 'application/json'
+                contentType: 'application/json',
                 success: function (res) {
                     window.location.href = "/posts";
                 }

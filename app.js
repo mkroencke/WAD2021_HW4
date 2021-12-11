@@ -1,12 +1,14 @@
 const express = require('express');
 const pool = require('./database');
-
+const bodyParser = require('body-parser');
+  
 const app = express();
 
 app.set('view engine', 'ejs');
 
 app.use(express.static(__dirname + '/res'));
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.listen(3000);
 
@@ -20,6 +22,27 @@ app.get('/posts', async(req, res) => {
             "SELECT * FROM posts ORDER BY datetime DESC"
         );
         res.render('posts', { posts: posts.rows });
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+app.post('/posts', async(req, res) => {
+    try {
+        console.log(req.body);
+        payload = req.body;
+        await pool.query(
+            "INSERT INTO public.posts(title, body, picurl, likes, datetime) VALUES ($1, $2, $3, $4, $5);", 
+            [payload.title, payload.body, payload.picurl, 0, new Date()] 
+        );
+        const posts = await pool.query(
+            "SELECT * FROM posts ORDER BY datetime DESC"
+        );
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.write(JSON.stringify({ 
+            status: "OK"
+        }));
+        res.end();
     } catch (err) {
         console.error(err.message);
     }
@@ -63,7 +86,7 @@ app.delete('/singlepost/:id', async(req, res) => {
     try {
         const id = req.params.id;
         await pool.query(
-            "DELETE FROM nodetable WHERE id = $1", [id]
+            "DELETE FROM posts WHERE id = $1", [id]
         );
         const posts = await pool.query(
             "SELECT * FROM posts ORDER BY datetime DESC"

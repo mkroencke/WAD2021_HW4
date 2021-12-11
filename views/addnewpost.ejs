@@ -1,19 +1,70 @@
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/header.css" />
-    <link rel="stylesheet" href="/css/footer.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
-      rel="stylesheet"
-    />
-    <title>Add new post</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/addnewpost.css" />
+  <link rel="stylesheet" href="/css/header.css" />
+  <link rel="stylesheet" href="/css/footer.css" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+  <title>Add new post</title>
 </head>
+
 <body>
   <%- include('./partials/header.ejs') %>
-  <%- include('./partials/footer.ejs') %>
+    <div class="post-submit-container">
+      <div class="post-submit-form">
+        <h1>New post</h1>
+          <div class="newpost">
+            <p>
+              <label class="required" for="title">Title:</label>
+              <input type="text" id="title" name="title" required>
+            </p><br><br>
+            <p>
+              <label class="required" for="body">Body:</label>
+              <textarea id="body" name="body" rows="4" required></textarea>
+            </p><br><br>
+            <p>
+              <label for="picurl">Image URL:</label>
+              <input type="text" id="picurl" name="picurl">
+            </p><br>
+          </div>
+          <div class="submitbuttoncontainer">
+            <button id="submitBtn" class="submit-button">Submit</button>
+          </div>
+      </div>
+    </div>
+    </div>
+    <%- include('./partials/footer.ejs') %>
 </body>
+
+<script>
+  $(document).ready(function () {
+    document.querySelector("#submitBtn").addEventListener("click", () => {
+      title = $("#title")[0].value;
+      body = $("#body")[0].value;
+      picurl = $("#picurl")[0].value;
+      if (!title || !body) {
+        return;
+      }
+      $.ajax({
+        url: "/posts",
+        type: 'Post',
+        contentType: 'application/json',
+        data: JSON.stringify({
+          title: title,
+          body: body,
+          picurl: picurl
+        }),
+        success: function (res) {
+          window.location.href = "/posts";
+        }
+      });
+    });
+  })
+</script>
+
 </html>

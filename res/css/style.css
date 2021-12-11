@@ -67,3 +67,7 @@ html, body {
     border-color: rgb(24, 5, 104);
     background-color: rgb(24, 5, 104);
 }
+
+.post-body {
+    word-break: break-all;
+}
